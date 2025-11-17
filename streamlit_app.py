@@ -7,7 +7,7 @@ from PIL import Image
 API_BASE = "https://fscvjbxjt2.us-east-1.awsapprunner.com"
 
 st.set_page_config(page_title="LTVAE SMILES Explorer", layout="wide")
-st.title("LTVAE: Latent Vectors & Property Prediction from SMILES")
+st.title("LTVAE: Get 2D Graph, Latent Vectors and Properties from SMILES")
 
 smiles = st.text_input("Enter SMILES", value="", placeholder="Paste a SMILES string…")
 
