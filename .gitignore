@@ -144,6 +144,27 @@ ENV/
 env.bak/
 venv.bak/
 
+# Python junk
+__pycache__/
+*.pyc
+.venv/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# Secrets & local config
+.env
+*.env
+secrets.toml
+.streamlit/secrets.toml
+.aws/
+
+# Big artifacts (optional)
+app/checkpoints/
+logs/
+
 # Spyder project settings
 .spyderproject
 .spyproject
