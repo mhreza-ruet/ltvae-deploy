@@ -2,6 +2,8 @@ import io
 import requests
 import streamlit as st
 from PIL import Image
+import base64
+from io import BytesIO
 
 # ---- API base (your App Runner URL, no trailing slash) ----
 API_BASE = "https://fscvjbxjt2.us-east-1.awsapprunner.com"
@@ -23,6 +25,19 @@ smiles = st.text_input(
     placeholder="Paste a SMILES string…",
 )
 
+
+def centered_image(img, width=450):
+    buf = BytesIO()
+    img.save(buf, format="PNG")
+    b64 = base64.b64encode(buf.getvalue()).decode()
+
+    html = f"""
+    <div style="display: flex; justify-content: center;">
+        <img src="data:image/png;base64,{b64}" width="{width}">
+    </div>
+    """
+    st.markdown(html, unsafe_allow_html=True)
+    
 
 col1, col2 = st.columns([1, 1])
 
@@ -67,7 +82,7 @@ if run_clicked and smiles.strip():
         # ------------------------------------------------------------------
         with col1:
             st.subheader("2D Molecular Graph (RDKit)")
-            st.image(img, width=450)
+            centered_image(img, width=450)
             st.caption(f"Input SMILES: `{smiles}`")
 
         # ------------------------------------------------------------------
