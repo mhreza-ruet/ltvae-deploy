@@ -66,7 +66,7 @@ if run_clicked and smiles.strip():
         # ------------------------------------------------------------------
         with col1:
             st.subheader("2D Molecular Graph (RDKit)")
-            st.image(img, use_column_width=True)
+            st.image(img, width=300)
             st.caption(f"Input SMILES: `{smiles}`")
 
         # ------------------------------------------------------------------
