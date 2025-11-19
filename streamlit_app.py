@@ -25,7 +25,7 @@ smiles = st.text_input(
     placeholder="Paste a SMILES string…",
 )
 
-def centered_responsive_image(img, width_pct=70):
+def centered_responsive_image(img, width_pct=80):
     """
     Display a PIL image centered using a percentage width inside its container.
     """
