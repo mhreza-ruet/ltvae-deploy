@@ -25,20 +25,6 @@ smiles = st.text_input(
     placeholder="Paste a SMILES string…",
 )
 
-
-def centered_image(img, width=450):
-    buf = BytesIO()
-    img.save(buf, format="PNG")
-    b64 = base64.b64encode(buf.getvalue()).decode()
-
-    html = f"""
-    <div style="display: flex; justify-content: center;">
-        <img src="data:image/png;base64,{b64}" width="{width}">
-    </div>
-    """
-    st.markdown(html, unsafe_allow_html=True)
-    
-
 col1, col2 = st.columns([1, 1])
 
 run_clicked = st.button("Run model", type="primary")
@@ -81,8 +67,12 @@ if run_clicked and smiles.strip():
         # Left column: 2D image
         # ------------------------------------------------------------------
         with col1:
-            st.subheader("2D Molecular Graph (RDKit)")
-            centered_image(img, width=450)
+            st.subheader("2D molecular graph (RDKit)")
+        
+            st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
+            st.image(img, width=450)
+            st.markdown("</div>", unsafe_allow_html=True)
+        
             st.caption(f"Input SMILES: `{smiles}`")
 
         # ------------------------------------------------------------------
