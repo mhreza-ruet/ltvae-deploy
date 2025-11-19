@@ -2,6 +2,8 @@ import io
 import requests
 import streamlit as st
 from PIL import Image
+import base64
+from io import BytesIO
 
 # ---- API base (your App Runner URL, no trailing slash) ----
 API_BASE = "https://fscvjbxjt2.us-east-1.awsapprunner.com"
@@ -22,6 +24,22 @@ smiles = st.text_input(
     value="",
     placeholder="Paste a SMILES string…",
 )
+
+def centered_responsive_image(img, width_pct=70):
+    """
+    Display a PIL image centered using a percentage width inside its container.
+    """
+    buf = BytesIO()
+    img.save(buf, format="PNG")
+    b64 = base64.b64encode(buf.getvalue()).decode()
+
+    html_code = f"""
+    <div style='text-align: center;'>
+        <img src="data:image/png;base64,{b64}" style="width:{width_pct}%;"/>
+    </div>
+    """
+
+    st.markdown(html_code, unsafe_allow_html=True)
 
 col1, col2 = st.columns([1, 1])
 
@@ -66,7 +84,7 @@ if run_clicked and smiles.strip():
         # ------------------------------------------------------------------
         with col1:
             st.subheader("2D Molecular Graph (RDKit)")
-            st.image(img, width=300)
+            centered_responsive_image(img, width_pct=70)  # 70% of col width, centered
             st.caption(f"Input SMILES: `{smiles}`")
 
         # ------------------------------------------------------------------
